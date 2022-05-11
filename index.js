@@ -9,8 +9,8 @@ const sequelize = require('./api/database')
 
 ;(async function () {
   try {
-    await sequelize.authenticate()
-    console.log('Connection has been established successfully.', process.env.POSTGRES_DB)
+    await sequelize.sync()
+    console.log('Connection has been established successfully.')
   } catch (error) {
     throw new Error (`Cannot connect to database: ${error}`)
   }
