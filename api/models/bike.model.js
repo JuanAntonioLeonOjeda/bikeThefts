@@ -10,7 +10,7 @@ const Bikes = sequelize.define('bikes', {
   color: {
     type: DataTypes.STRING
   },
-  type: {
+  bikeType: {
     type: DataTypes.ENUM('Road', 'Mountain', 'Hybrid', 'Electric')
   },
   ownerId: {
