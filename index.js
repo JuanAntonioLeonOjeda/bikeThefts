@@ -7,6 +7,9 @@ const morgan = require('morgan')
 const cors = require('cors')
 const sequelize = require('./api/database')
 
+const Case = require('./api/models/case.model')
+const Bike = require('./api/models/bike.model')
+
 ;(async function () {
   try {
     await sequelize.sync()

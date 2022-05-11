@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../database')
+const Bike = require('./bike.model')
 
-const Cases = sequelize.define('cases', {
+const Case = sequelize.define('cases', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -22,4 +23,14 @@ const Cases = sequelize.define('cases', {
   }
 })
 
-module.exports = Cases
+Case.hasOne(Bike, {
+  foreignKey: 'caseId',
+  sourceKey: 'id'
+})
+
+Bike.belongsTo(Case, {
+  foreignKey: 'caseId',
+  targetId:'id'
+})
+
+module.exports = Case

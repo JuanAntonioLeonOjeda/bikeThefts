@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../database')
 
-const Officers = sequelize.define('officers', {
+const Officer = sequelize.define('officers', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -21,4 +21,4 @@ const Officers = sequelize.define('officers', {
   }
 })
 
-module.exports = Officers
+module.exports = Officer
