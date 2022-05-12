@@ -4,21 +4,21 @@ const Bike = require('./bike.model')
 
 const Case = sequelize.define('cases', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true
   },
   bikeId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   officerId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   ownerId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   departmentId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   open: {
     type: DataTypes.BOOLEAN,

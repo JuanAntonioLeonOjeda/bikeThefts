@@ -3,9 +3,9 @@ const sequelize = require('../database')
 
 const Owner = sequelize.define('owners', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true
   },
   fullName: {
     type: DataTypes.STRING,
@@ -21,13 +21,13 @@ const Owner = sequelize.define('owners', {
     type: DataTypes.STRING
   },
   currentCase: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   pastCases: {
-    type: DataTypes.ARRAY(DataTypes.INTEGER)
+    type: DataTypes.ARRAY(DataTypes.UUID)
   },
   department: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   role: {
     type: DataTypes.ENUM('owner', 'officer', 'director', 'admin')

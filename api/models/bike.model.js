@@ -3,9 +3,9 @@ const sequelize = require('../database')
 
 const Bike = sequelize.define('bikes', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true
   },
   color: {
     type: DataTypes.STRING
@@ -14,7 +14,7 @@ const Bike = sequelize.define('bikes', {
     type: DataTypes.ENUM('Road', 'Mountain', 'Hybrid', 'Electric')
   },
   ownerId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   },
   theftDate: {
     type: DataTypes.DATE
@@ -26,7 +26,7 @@ const Bike = sequelize.define('bikes', {
     type: DataTypes.STRING
   },
   caseId: {
-    type: DataTypes.INTEGER
+    type: DataTypes.UUID
   }
 })
 
