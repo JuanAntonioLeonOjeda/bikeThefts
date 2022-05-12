@@ -8,7 +8,8 @@ const Owner = sequelize.define('owners', {
     autoIncrement: true
   },
   fullName: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   email: {
     type: DataTypes.STRING,
