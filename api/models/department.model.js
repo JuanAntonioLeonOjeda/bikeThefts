@@ -1,5 +1,8 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../database')
+const Case = require('./case.model')
+const User = require('./user.model')
+
 
 const Department = sequelize.define('departments', {
   id: {
@@ -9,19 +12,26 @@ const Department = sequelize.define('departments', {
   },
   name: {
     type: DataTypes.ENUM('Municipal', 'State', 'County')
-  },
-  activeCases: {
-    type: DataTypes.ARRAY(DataTypes.UUID)
-  },
-  solvedCases: {
-    type: DataTypes.ARRAY(DataTypes.UUID)
-  },
-  officers: {
-    type: DataTypes.ARRAY(DataTypes.UUID)
-  },
-  director: {
-    type: DataTypes.UUID
   }
 })
+
+Department.hasMany(Case, {
+  foreignKey: {
+    name: 'departmentId',
+    type: DataTypes.UUID,
+    allowNull: false
+  },
+  sourceKey: 'id'
+})
+Case.belongsTo(Department)
+
+Department.hasMany(User, {
+  foreignKey: {
+    name: 'departmentId',
+    type: DataTypes.UUID
+  },
+  sourceKey: 'id'
+})
+User.belongsTo(Department)
 
 module.exports = Department

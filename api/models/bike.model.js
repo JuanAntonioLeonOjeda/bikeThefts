@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../database')
+const Case = require('./case.model')
 
 const Bike = sequelize.define('bikes', {
   id: {
@@ -13,9 +14,6 @@ const Bike = sequelize.define('bikes', {
   bikeType: {
     type: DataTypes.ENUM('Road', 'Mountain', 'Hybrid', 'Electric')
   },
-  ownerId: {
-    type: DataTypes.UUID
-  },
   theftDate: {
     type: DataTypes.DATE
   },
@@ -24,10 +22,18 @@ const Bike = sequelize.define('bikes', {
   },
   theftAddress: {
     type: DataTypes.STRING
-  },
-  caseId: {
-    type: DataTypes.UUID
   }
 })
+
+Bike.hasMany(Case, {
+  foreignKey: {
+    name: 'bikeId',
+    type: DataTypes.UUID,
+    allowNull: false
+  },
+  sourceKey: 'id'
+})
+
+Case.belongsTo(Bike)
 
 module.exports = Bike

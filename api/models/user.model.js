@@ -1,7 +1,10 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../database')
+const Bike = require('./bike.model')
+const Case = require('./case.model')
 
-const Owner = sequelize.define('owners', {
+
+const User = sequelize.define('users', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -26,12 +29,21 @@ const Owner = sequelize.define('owners', {
   pastCases: {
     type: DataTypes.ARRAY(DataTypes.UUID)
   },
-  department: {
-    type: DataTypes.UUID
-  },
   role: {
     type: DataTypes.ENUM('owner', 'officer', 'director', 'admin')
   }
 })
 
-module.exports = Owner
+User.hasMany(Bike, {
+  foreignKey: {
+    name: 'ownerId',
+    type: DataTypes.UUID
+  },
+  sourceKey: 'id'
+})
+
+Bike.belongsTo(User)
+
+//Relación many to many entre Case y User
+
+module.exports = User
