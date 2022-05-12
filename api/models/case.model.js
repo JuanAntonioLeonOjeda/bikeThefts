@@ -7,12 +7,6 @@ const Case = sequelize.define('cases', {
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
-  officerId: {
-    type: DataTypes.UUID
-  },
-  ownerId: {
-    type: DataTypes.UUID
-  },
   open: {
     type: DataTypes.BOOLEAN,
     defaultValue: true

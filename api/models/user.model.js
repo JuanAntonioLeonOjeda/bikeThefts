@@ -23,12 +23,6 @@ const User = sequelize.define('users', {
   password: {
     type: DataTypes.STRING
   },
-  currentCase: {
-    type: DataTypes.UUID
-  },
-  pastCases: {
-    type: DataTypes.ARRAY(DataTypes.UUID)
-  },
   role: {
     type: DataTypes.ENUM('owner', 'officer', 'director', 'admin')
   }
@@ -44,6 +38,8 @@ User.hasMany(Bike, {
 
 Bike.belongsTo(User)
 
-//Relación many to many entre Case y User
+Case.belongsToMany(User, { as: 'User', foreignKey: 'userId', through: 'Users_Cases' })
+User.belongsToMany(Case, { through: 'Case', foreignKey: 'caseId', through: 'Users_Cases' })
+
 
 module.exports = User

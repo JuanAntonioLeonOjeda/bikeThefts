@@ -9,6 +9,8 @@ const sequelize = require('./api/database')
 
 const Case = require('./api/models/case.model')
 const Bike = require('./api/models/bike.model')
+const User = require('./api/models/user.model')
+const Department = require('./api/models/department.model')
 
 ;(async function () {
   try {
