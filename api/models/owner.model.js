@@ -17,11 +17,20 @@ const Owner = sequelize.define('owners', {
       isEmail: true
     }
   },
+  password: {
+    type: DataTypes.STRING
+  },
   currentCase: {
     type: DataTypes.INTEGER
   },
   pastCases: {
     type: DataTypes.ARRAY(DataTypes.INTEGER)
+  },
+  department: {
+    type: DataTypes.INTEGER
+  },
+  role: {
+    type: DataTypes.ENUM('owner', 'officer', 'director', 'admin')
   }
 })
 

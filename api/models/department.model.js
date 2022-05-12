@@ -15,6 +15,12 @@ const Department = sequelize.define('departments', {
   },
   solvedCases: {
     type: DataTypes.ARRAY(DataTypes.INTEGER)
+  },
+  officers: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER)
+  },
+  director: {
+    type: DataTypes.INTEGER
   }
 })
 

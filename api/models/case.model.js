@@ -17,6 +17,9 @@ const Case = sequelize.define('cases', {
   ownerId: {
     type: DataTypes.INTEGER
   },
+  departmentId: {
+    type: DataTypes.INTEGER
+  },
   open: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
