@@ -52,11 +52,11 @@
 
 ### Bikes Endpoints
 
-| METHOD | ENDPOINT          | TOKEN | ROLE     | DESCRIPTION                      | POST PARAMS| RETURNS                  |
-| ------ | ----------------- | ----- | -------- | ---------------------            | ---------- | ------------------------ |
-| GET    | /bike             | YES   | Admin    | Get all bikes                    | -          | [{ bikes }]              |
-| GET    | /bike/:id         | YES   | Admin    | Get one bike                     | bike_id    | { bike }                 |
-| PUT    | /bike/:id         | YES   | Admin    | Update one bike                  | bike_id    | "Bike updated", { bike } |
-| DELETE | /bike/:id         | YES   | Admin    | Remove one bike                  | bike_id    | "Bike deleted"           |
-| GET    | /bike/me/open     | YES   | -        | Get user's bike from open case   | case_id    | { bike }                 |
-| PUT    | /bike/me/open     | YES   | Owner    | Update user's bike from open case| case_id    | "Bike updated", { bike } |
+| METHOD | ENDPOINT          | TOKEN | ROLE                        | DESCRIPTION                      | POST PARAMS| RETURNS                  |
+| ------ | ----------------- | ----- | --------------------------- | -------------------------------- | ---------- | ------------------------ |
+| GET    | /bike             | YES   | Admin, Director, Officer    | Get all bikes                    | query      | [{ bikes }]              |
+| GET    | /bike/:id         | YES   | Admin                       | Get one bike                     | bike_id    | { bike }                 |
+| PUT    | /bike/:id         | YES   | Admin                       | Update one bike                  | bike_id    | "Bike updated", { bike } |
+| DELETE | /bike/:id         | YES   | Admin                       | Remove one bike                  | bike_id    | "Bike deleted"           |
+| GET    | /bike/me/open     | YES   | -                           | Get user's bike from open case   | case_id    | { bike }                 |
+| PUT    | /bike/me/open     | YES   | Owner                       | Update user's bike from open case| case_id    | "Bike updated", { bike } |
