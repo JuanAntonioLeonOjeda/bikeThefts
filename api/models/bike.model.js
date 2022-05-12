@@ -25,7 +25,7 @@ const Bike = sequelize.define('bikes', {
   }
 })
 
-Bike.hasMany(Case, {
+Bike.hasOne(Case, {
   foreignKey: {
     name: 'bikeId',
     type: DataTypes.UUID,
