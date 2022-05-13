@@ -7,11 +7,6 @@ const morgan = require('morgan')
 const cors = require('cors')
 const sequelize = require('./api/database')
 
-const Case = require('./api/models/case.model')
-const Bike = require('./api/models/bike.model')
-const User = require('./api/models/user.model')
-const Department = require('./api/models/department.model')
-
 ;(async function () {
   try {
     await sequelize.sync({ force: true })
@@ -27,6 +22,7 @@ try {
   app
     .use(cors())
     .use(morgan('dev'))
+    .use(express.json())
     .use('/api', require('./api/routes'))
 
     .listen(process.env.PORT)

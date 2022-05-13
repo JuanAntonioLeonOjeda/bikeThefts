@@ -41,7 +41,6 @@ async function director (req, res) {
 async function createUser (body) {
   const hash = bcrypt.hashSync(body.password, 10)
   body.password = hash
-
   const user = await User.create(body)
   return user
 }
