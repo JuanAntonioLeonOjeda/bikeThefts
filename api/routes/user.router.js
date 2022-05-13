@@ -8,10 +8,12 @@ const {
 } = require('../utils')
 
 const {
-  getAllUsers
+  getAllUsers,
+  getOneUser
 } = require('../controllers/user.controller')
 
 router
   .get('/', checkAuth, checkAdmin, getAllUsers)
+  .get('/:id', checkAuth, checkAdmin, getOneUser)
 
 module.exports = router
