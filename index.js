@@ -9,7 +9,7 @@ const sequelize = require('./api/database')
 
 ;(async function () {
   try {
-    await sequelize.sync({ force: true })
+    await sequelize.sync()
     console.log('Connection has been established successfully.')
   } catch (error) {
     throw new Error (`Cannot connect to database: ${error}`)

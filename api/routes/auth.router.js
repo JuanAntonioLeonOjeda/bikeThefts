@@ -1,6 +1,12 @@
 const router = require('express').Router()
 
 const {
+  checkAuth,
+  checkAdmin,
+  checkDirector
+} = require('../utils')
+
+const {
   signup,
   officer,
   director,
@@ -9,5 +15,8 @@ const {
 
 router
   .post('/signup', signup)
+  .post('/officer', checkAuth, checkDirector, officer)
+  .post('/director', checkAuth, checkAdmin, director)
+  .post('/login', login)
 
 module.exports = router

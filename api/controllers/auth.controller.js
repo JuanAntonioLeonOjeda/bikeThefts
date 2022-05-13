@@ -39,6 +39,7 @@ async function director (req, res) {
 }
 
 async function createUser (body) {
+  console.log(body)
   const hash = bcrypt.hashSync(body.password, 10)
   body.password = hash
   const user = await User.create(body)
@@ -47,6 +48,7 @@ async function createUser (body) {
 
 async function login (req, res) {
   try {
+    console.log(req.body.email)
     const user = await User.findOne({ where: { email: req.body.email } })
     if (!user) return res.status(500).send('Email or password incorrect')
 
@@ -60,7 +62,7 @@ async function login (req, res) {
       res.status(200).json({ email: user.email, token: token })
     })
   } catch (error) {
-    res.status(500).send('Error login user')
+    res.status(500).send(`Error login user: ${error}`)
   }
 }
 
