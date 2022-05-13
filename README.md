@@ -13,14 +13,14 @@
 
 | METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
 | ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
-| GET    | /users                    | YES   | Admin | Get all users                | -                          | [{ users }]                          |
-| GET    | /users/me                 | YES   | -     | Get own profile              | user_id                    | { user }                             |
-| GET    | /users/:userId            | YES   | Admin | Get one user                 | user_id                    | { user }                             |
-| PUT    | /users/me                 | YES   | -     | Update own profile           | user_id                    | { user }                             |
-| DELETE | /users/:userId            | YES   | Admin | Remove user profile          | user_id                    | "Profile deleted"                    |
-| GET    | /users/me/open            | YES   | -     | Get user's open case         | user_id                    | {case} / "You have no opened cases"  |
-| GET    | /users/me/cases           | YES   | -     | Get all user past cases      | user_id                    | [{ cases }]                          |
-| POST   | /users/me/password        | YES   | -     | Change own password          | old_password, new_password | "Password updated"                   |
+| GET    | /user                    | YES   | Admin | Get all users                | -                          | [{ users }]                          |
+| GET    | /user/me                 | YES   | -     | Get own profile              | user_id                    | { user }                             |
+| GET    | /user/:userId            | YES   | Admin | Get one user                 | user_id                    | { user }                             |
+| PUT    | /user/me                 | YES   | -     | Update own profile           | user_id                    | { user }                             |
+| DELETE | /user/:userId            | YES   | Admin | Remove user profile          | user_id                    | "Profile deleted"                    |
+| GET    | /user/me/open            | YES   | -     | Get user's open case         | user_id                    | {case} / "You have no opened cases"  |
+| GET    | /user/me/cases           | YES   | -     | Get all user past cases      | user_id                    | [{ cases }]                          |
+| POST   | /user/me/password        | YES   | -     | Change own password          | old_password, new_password | "Password updated"                   |
 
 
 ### Cases Endpoints

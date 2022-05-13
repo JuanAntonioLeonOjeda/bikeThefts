@@ -25,7 +25,7 @@ const checkAdmin = (req, res, next) => {
 }
 
 const checkDirector = (req, res, next) => {
-  if (res.locals.user.role !== 'director' || res.locals.user.role !== 'admin') {
+  if (res.locals.user.role !== 'director' && res.locals.user.role !== 'admin') {
     res.send('Error: User not authorized')
   } else {
     next()
