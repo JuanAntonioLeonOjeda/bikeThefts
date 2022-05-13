@@ -11,7 +11,8 @@ const {
   getAllUsers,
   getOwnProfile,
   getOneUser,
-  updateOwnProfile
+  updateOwnProfile,
+  deleteUser
 } = require('../controllers/user.controller')
 
 router
@@ -19,5 +20,6 @@ router
   .get('/me', checkAuth, getOwnProfile)
   .get('/:id', checkAuth, checkAdmin, getOneUser)
   .put('/me', checkAuth, updateOwnProfile)
+  .delete('/:id', checkAuth, checkAdmin, deleteUser)
 
 module.exports = router

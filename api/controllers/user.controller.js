@@ -29,14 +29,28 @@ async function getOneUser(req, res) {
 
 async function updateOwnProfile(req, res) {
   try {
-    const user = await User.findByPk(res.locals.user.id)
-    await user.set(req.body)
-    await user.save()
-    await user.reload()
+    await User.update(req.body, {
+      where: {
+        id: res.locals.user.id
+      }
+    })
 
-    res.status(200).json({ message: 'Profile updated!', profile: user })
+    res.status(200).json({ message: 'Profile updated!' })
   } catch (error) {
     res.status(500).send(`Error updating profile: ${error}`)
+  }
+}
+
+async function deleteUser(req, res) {
+  try {
+    const user = await User.destroy({ where: { id: req.params.id } })
+    if (!user) {
+      res.status(200).send('User not found')
+    } else {
+      res.status(200).send('User deleted')
+    }
+  } catch (error) {
+    res.status(500).send(`Error deleting user: ${error}`)
   }
 }
 
@@ -44,5 +58,6 @@ module.exports = {
   getAllUsers,
   getOwnProfile,
   getOneUser,
-  updateOwnProfile
+  updateOwnProfile,
+  deleteUser
 }
