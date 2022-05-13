@@ -5,10 +5,8 @@ const jwt = require('jsonwebtoken')
 
 async function signup (req, res) {
   try {
-    const hash = bcrypt.hashSync(req.body.password, 10)
-    req.body.password = hash
+    const user = await createUser(req.body)
 
-    const user = await User.create(req.body)
     const payload = { email: user.email }
     const token = jwt.sign(payload, process.env.TOKEN, { expiresIn: '1h' })
 
@@ -37,7 +35,39 @@ async function login (req, res) {
   }
 }
 
+async function officer (req, res) {
+  try {
+    req.body.role = 'officer'
+    const user = await createUser(req.body)
+
+    res.status(200).json({ message: `Officer ${user.fullName}'s profile succesfully created`, user })
+  } catch (error) {
+    res.status(500).send(`Error creating officer: ${error}`)
+  }
+}
+
+async function director (req, res) {
+  try {
+    req.body.role = 'director'
+    const user = await createUser(req.body)
+
+    res.status(200).json({ message: `Director ${user.fullName}'s profile succesfully created`, user })
+  } catch (error) {
+    res.status(500).send(`Error creating director: ${error}`)
+  }
+}
+
+async function createUser (body) {
+  const hash = bcrypt.hashSync(body.password, 10)
+  body.password = hash
+
+  const user = await User.create(body)
+  return user
+}
+
 module.exports = {
   signup,
-  login
+  login,
+  officer,
+  director
 }
