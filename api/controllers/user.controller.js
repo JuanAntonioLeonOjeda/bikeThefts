@@ -27,8 +27,22 @@ async function getOneUser(req, res) {
   }
 }
 
+async function updateOwnProfile(req, res) {
+  try {
+    const user = await User.findByPk(res.locals.user.id)
+    await user.set(req.body)
+    await user.save()
+    await user.reload()
+
+    res.status(200).json({ message: 'Profile updated!', profile: user })
+  } catch (error) {
+    res.status(500).send(`Error updating profile: ${error}`)
+  }
+}
+
 module.exports = {
   getAllUsers,
   getOwnProfile,
-  getOneUser
+  getOneUser,
+  updateOwnProfile
 }

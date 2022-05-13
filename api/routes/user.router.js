@@ -10,12 +10,14 @@ const {
 const {
   getAllUsers,
   getOwnProfile,
-  getOneUser
+  getOneUser,
+  updateOwnProfile
 } = require('../controllers/user.controller')
 
 router
   .get('/', checkAuth, checkAdmin, getAllUsers)
   .get('/me', checkAuth, getOwnProfile)
   .get('/:id', checkAuth, checkAdmin, getOneUser)
+  .put('/me', checkAuth, updateOwnProfile)
 
 module.exports = router
