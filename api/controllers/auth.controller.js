@@ -16,25 +16,6 @@ async function signup (req, res) {
   }
 }
 
-async function login (req, res) {
-  try {
-    const user = await User.findOne({ where: { email: req.body.email } })
-    if (!user) return res.status(500).send('Email or password incorrect')
-
-    bcrypt.compare(req.body.password, user.password, (err, result) => {
-      if (err) return res.status(500).send(err)
-      if (!result) return res.status('Email or password incorrect')
-
-      const payload = { email: user.email }
-      const token = jwt.sign(payload, process.env.TOKEN, { expiresIn: '1h' })
-
-      res.status(200).json({ email: user.email, token: token })
-    })
-  } catch (error) {
-    res.status(500).send('Error login user')
-  }
-}
-
 async function officer (req, res) {
   try {
     req.body.role = 'officer'
@@ -65,9 +46,28 @@ async function createUser (body) {
   return user
 }
 
+async function login (req, res) {
+  try {
+    const user = await User.findOne({ where: { email: req.body.email } })
+    if (!user) return res.status(500).send('Email or password incorrect')
+
+    bcrypt.compare(req.body.password, user.password, (err, result) => {
+      if (err) return res.status(500).send(err)
+      if (!result) return res.status('Email or password incorrect')
+
+      const payload = { email: user.email }
+      const token = jwt.sign(payload, process.env.TOKEN, { expiresIn: '1h' })
+
+      res.status(200).json({ email: user.email, token: token })
+    })
+  } catch (error) {
+    res.status(500).send('Error login user')
+  }
+}
+
 module.exports = {
   signup,
-  login,
   officer,
-  director
+  director,
+  login
 }
