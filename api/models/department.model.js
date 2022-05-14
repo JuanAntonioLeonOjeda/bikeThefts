@@ -18,8 +18,7 @@ const Department = sequelize.define('departments', {
 Department.hasMany(Case, {
   foreignKey: {
     name: 'departmentId',
-    type: DataTypes.UUID,
-    allowNull: false
+    type: DataTypes.UUID
   },
   sourceKey: 'id'
 })
@@ -28,7 +27,8 @@ Case.belongsTo(Department)
 Department.hasMany(User, {
   foreignKey: {
     name: 'departmentId',
-    type: DataTypes.UUID
+    type: DataTypes.UUID,
+    defaultValue: null
   },
   sourceKey: 'id'
 })

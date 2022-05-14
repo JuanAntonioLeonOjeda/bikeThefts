@@ -10,16 +10,20 @@ const {
 const {
   getAllUsers,
   getOwnProfile,
-  getOneUser,
   updateOwnProfile,
-  deleteUser
+  getOneUser,
+  updateOneUser,
+  deleteUser,
+  getOwnOpenCase
 } = require('../controllers/user.controller')
 
 router
   .get('/', checkAuth, checkAdmin, getAllUsers)
   .get('/me', checkAuth, getOwnProfile)
-  .get('/:id', checkAuth, checkAdmin, getOneUser)
   .put('/me', checkAuth, updateOwnProfile)
+  .get('/:id', checkAuth, checkAdmin, getOneUser)
+  .put('/:id', checkAuth, checkAdmin, updateOneUser)
   .delete('/:id', checkAuth, checkAdmin, deleteUser)
+  .get('/me/open', checkAuth, getOwnOpenCase)
 
 module.exports = router

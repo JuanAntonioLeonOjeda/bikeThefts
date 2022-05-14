@@ -16,6 +16,7 @@
 | GET    | /user                    | YES   | Admin | Get all users                | -                          | [{ users }]                          |
 | GET    | /user/me                 | YES   | -     | Get own profile              | user_id                    | { user }                             |
 | GET    | /user/:userId            | YES   | Admin | Get one user                 | user_id                    | { user }                             |
+| PUT    | /user/:userId            | YES   | Admin | Update one user              | user_id, body              | { user }                             |
 | PUT    | /user/me                 | YES   | -     | Update own profile           | user_id                    | { user }                             |
 | DELETE | /user/:userId            | YES   | Admin | Remove user profile          | user_id                    | "Profile deleted"                    |
 | GET    | /user/me/open            | YES   | -     | Get user's open case         | user_id                    | {case} / "You have no opened cases"  |
@@ -28,11 +29,11 @@
 | METHOD | ENDPOINT      | TOKEN | ROLE    | DESCRIPTION     | POST PARAMS                                                          | RETURNS                    |
 | ------ | ------------- | ----- | ------- | --------------- | ---------------------------------------------------------------------| -------------------------- |
 | GET    | /case         | YES   | Admin   | Get all cases   |                                                                      | [{ cases }]                |
+| POST   | /case/me      | YES   | Owner   | Open case       | license_num, color, type, theftDate, theft_description, theft_adress | "Case opened", { case }    |
 | GET    | /case/:id     | YES   | Admin   | Get one case    | case_id                                                              | { case }                   |
 | PUT    | /case/:id     | YES   | Admin   | Update case     | case_id                                                              | "Case updated", { case }   |
 | DELETE | /case/:id     | YES   | Admin   | Remove case     | case_id                                                              | "Case deleted"             |
-| POST   | /me/case      | YES   | Owner   | Open case       | license_num, color, type, theftDate, theft_description, theft_adress | "Case opened", { case }    |
-| PUT    | /me/case/close| YES   | Officer | Close case      |                                                                      | "Case closed", { case }    |
+| PUT    | /case/me/close| YES   | Officer | Close case      |                                                                      | "Case closed", { case }    |
 
 
 ### Department Endpoints

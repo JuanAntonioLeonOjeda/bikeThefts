@@ -1,4 +1,5 @@
 const User = require('../models/user.model')
+const Case = require('../models/case.model')
 
 async function getAllUsers (req, res) {
   try {
@@ -41,6 +42,20 @@ async function updateOwnProfile(req, res) {
   }
 }
 
+async function updateOneUser(req, res) {
+  try {
+    await User.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+
+    res.status(200).json({ message: 'Profile updated!' })
+  } catch (error) {
+    res.status(500).send(`Error updating profile: ${error}`)
+  }
+}
+
 async function deleteUser(req, res) {
   try {
     const user = await User.destroy({ where: { id: req.params.id } })
@@ -54,10 +69,31 @@ async function deleteUser(req, res) {
   }
 }
 
+async function getOwnOpenCase(req, res) {
+  try {
+    const user = await User.findByPk(res.locals.user.id)
+    const openCase = await user.getCase({
+      where: {
+        status: 'open'
+      }
+    })
+
+    if(!openCase) {
+      res.status(200).send("You don't have any open cases")
+    } else {
+      res.status(200).json(openCase)
+    }
+  } catch (error) {
+    res.status(500).send(`Error getting open case: ${error}`)
+  }
+}
+
 module.exports = {
   getAllUsers,
   getOwnProfile,
   getOneUser,
   updateOwnProfile,
-  deleteUser
+  updateOneUser,
+  deleteUser,
+  getOwnOpenCase
 }

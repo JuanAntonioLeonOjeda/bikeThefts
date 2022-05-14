@@ -48,7 +48,6 @@ async function createUser (body) {
 
 async function login (req, res) {
   try {
-    console.log(req.body.email)
     const user = await User.findOne({ where: { email: req.body.email } })
     if (!user) return res.status(500).send('Email or password incorrect')
 

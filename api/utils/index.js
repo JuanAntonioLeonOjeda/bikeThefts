@@ -40,9 +40,18 @@ const checkOfficer = (req, res, next) => {
   }
 }
 
+const checkOwner = (req, res, next) => {
+  if (res.locals.user.role !== 'owner') {
+    res.send('Error: User not authorized')
+  } else {
+    next()
+  }
+}
+
 module.exports = {
   checkAuth,
   checkAdmin,
   checkDirector,
-  checkOfficer
+  checkOfficer,
+  checkOwner
 }
