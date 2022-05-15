@@ -21,7 +21,10 @@ async function getOwnProfile(req, res) {
 
 async function getOneUser(req, res) {
   try {
-    const user = await User.findByPk(req.params.id)
+    const user = await User.findOne({
+      where: { id: req.params.id }
+    })
+    // const cases = await user.getCases()
     res.status(200).json(user)
   } catch (error) {
     res.status(500).send(`Error getting user: ${error}`)

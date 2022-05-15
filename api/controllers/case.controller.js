@@ -17,12 +17,25 @@ async function openCase(req, res) {
       theftAddress: body.theftAddress,  
     })
     const officer = await searchOfficer()
+    if(!officer) return res.status(200).send('No officers available')
 
     const newCase = await Case.create( {
       bikeId: bike.id,
     })
     newCase.addUser(officer.id)
     newCase.addUser(res.locals.user.id)
+
+    await User.update({ openCase: true }, {
+      where: {
+        id: res.locals.user.id
+      }
+    })
+
+    await User.update({ openCase: true }, {
+      where: {
+        id: officer.id
+      }
+    })
 
     await Bike.update({ caseId: newCase.id }, {
       where: {
@@ -38,7 +51,8 @@ async function openCase(req, res) {
 
 async function searchOfficer() {
   const officer = await User.findOne({ where: {
-    role: 'officer'
+    role: 'officer',
+    openCase: false
   } })
   return officer
 }

@@ -28,6 +28,10 @@ const User = sequelize.define('users', {
   },
   role: {
     type: DataTypes.ENUM('owner', 'officer', 'director', 'admin')
+  },
+  openCase: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 })
 
