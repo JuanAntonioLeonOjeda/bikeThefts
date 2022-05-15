@@ -19,29 +19,19 @@ const User = sequelize.define('users', {
     validate: {
       isEmail: true
     },
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   password: {
     type: DataTypes.STRING,
     allowNull: false
   },
   role: {
-    type: DataTypes.ENUM('owner', 'officer', 'director', 'admin'),
-    defaultValue: 'owner',
+    type: DataTypes.ENUM('owner', 'officer', 'director', 'admin')
   }
 })
 
-User.hasMany(Bike, {
-  foreignKey: {
-    name: 'ownerId',
-    type: DataTypes.UUID
-  },
-  sourceKey: 'id'
-})
-
-Bike.belongsTo(User)
-
-Case.belongsToMany(User, { as: 'User', foreignKey: 'userId', through: 'Users_Cases' })
-User.belongsToMany(Case, { through: 'Case', foreignKey: 'caseId', through: 'Users_Cases' })
+Case.belongsToMany(User, { through: 'Users_Cases' })
+User.belongsToMany(Case, { through: 'Users_Cases' })
 
 module.exports = User

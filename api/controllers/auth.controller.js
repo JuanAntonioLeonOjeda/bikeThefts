@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 
 async function signup (req, res) {
   try {
+    req.body.role = 'owner'
     const user = await createUser(req.body)
 
     const payload = { email: user.email }
@@ -39,10 +40,15 @@ async function director (req, res) {
 }
 
 async function createUser (body) {
-  console.log(body)
   const hash = bcrypt.hashSync(body.password, 10)
   body.password = hash
-  const user = await User.create(body)
+  const user = await User.create({
+    fullName: body.fullName,
+    email: body.email,
+    password: body.password,
+    role: body.role
+  })
+  
   return user
 }
 
