@@ -5,9 +5,7 @@ const Case = require('../models/case.model')
 async function getAllBikes(req, res) {
   try {
     const bikes = await Bike.findAll({
-      where: {
-        color: 'Blue'
-      },
+      where: req.query,
       include: {
         model: Case,
         include: {
